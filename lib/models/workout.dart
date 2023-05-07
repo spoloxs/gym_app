@@ -29,7 +29,9 @@ class Workout extends Equatable{ // As this data will change as per user, we nee
     int time = excercises.fold(0, (previousValue, element) => previousValue + element.prelude + element.duration);
     return time;
   }
-  
+
+  copyWith({String? title, List<Excercise>? excercises}) => Workout(title: title??this.title, excercises: excercises??this.excercises);
+
   @override
   List<Object?> get props => [title, excercises];
 }

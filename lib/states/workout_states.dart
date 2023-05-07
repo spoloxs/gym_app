@@ -19,5 +19,5 @@ class WorkoutEditing extends WorkoutState{ // Create the editing state
   final int index;
   final int? exindex;
   @override
-  List<Object?> get props => [workout, index];
+  List<Object?> get props => [workout, index, exindex];
 }

@@ -13,11 +13,11 @@ class Excercise extends Equatable{ // Needs to be equatable in order to be chang
     }
   ); // constructor
 
-  String title;
-  int prelude;
-  int duration;
-  int? index;
-  int? startTime;
+  final String title;
+  final int prelude;
+  final int duration;
+  final int? index;
+  final int? startTime;
 
   // Also a constructor but can send data already in Excercise class stored in memory
   // so we are using factory
@@ -35,6 +35,18 @@ class Excercise extends Equatable{ // Needs to be equatable in order to be chang
     "duration" : duration,
   };
   
+  Excercise CopyWith({
+    String? title,
+    int? prelude,
+    int? duration,
+    int? index,
+    int? startTime
+  })=> Excercise(title: title??this.title,
+    prelude: prelude??this.prelude,
+    duration: duration??this.duration,
+    index: index??this.index,
+    startTime: startTime??this.startTime);
+
   @override
   List<Object?> get props => [title, prelude, duration, index, startTime];
 }

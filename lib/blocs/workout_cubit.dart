@@ -16,5 +16,5 @@ class WorkoutCubit extends Cubit<WorkoutState>{
   => emit(const WorkoutInitial());
 
   editExcercise(int? exindex)
-  => emit(WorkoutEditing(state.workout, (state as WorkoutEditing).index, (state as WorkoutEditing).exindex))
+  => emit(WorkoutEditing(state.workout, (state as WorkoutEditing).index, exindex));
 }

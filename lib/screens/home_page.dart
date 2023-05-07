@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                                               workouts
                                                   .indexOf(workoutiterable)),
                                   icon: const Icon(Icons.edit)),
-                              title: Text(workoutiterable.title!),
+                              title: Text(workoutiterable.title),
                               trailing: Text(formatTime(
                                   workoutiterable.getTotalTime(), true)),
                             ),
