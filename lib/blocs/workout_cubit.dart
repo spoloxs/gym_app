@@ -1,34 +1,20 @@
-import 'dart:convert';
+import 'dart:io';
 
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_app/models/workout.dart';
 
-class WorkoutsCubit extends Cubit<List<Workout>>{ // Used cubit as we need to change data in it
-  WorkoutsCubit():super([]);
+import '../states/workout_states.dart';
 
-  getWorkout() async{
-    final List<Workout> workouts = [];
+class WorkoutCubit extends Cubit<WorkoutState>{
+  WorkoutCubit():super(const WorkoutInitial());
 
-    final workoutsJson = jsonDecode(await rootBundle.loadString("assets/workouts.json"));
-    for(var el in (workoutsJson as Iterable))
-    {
-      workouts.add(Workout.fromJson(el));
-    }
+  editWorkout(Workout workout, int index)
+  => emit(WorkoutEditing(workout, index, null));
 
-    emit(workouts); // Tells flutter change in state of workouts
-  }
+  goHome() // Setting it to WorkoutInitial as calling it automatically returns us to HomePage() (it's written in the main.dart)
+  => emit(const WorkoutInitial());
 
-  // We could do this for BLoC
-  // on<Events>() async{
-  //   final List<Workout> workouts = [];
-
-  //   final workoutsJson = jsonDecode(await rootBundle.loadString("assets/workouts.json"));
-  //   for(var el in (workoutsJson as Iterable))
-  //   {
-  //     workouts.add(Workout.fromJson(el));
-  //   }
-
-  //   emit(workouts); 
-  // }
+  editExcercise(int? exindex)
+  => emit(WorkoutEditing(state.workout, (state as WorkoutEditing).index, (state as WorkoutEditing).exindex))
 }

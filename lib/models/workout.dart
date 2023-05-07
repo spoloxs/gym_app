@@ -4,7 +4,7 @@ import 'exercise.dart';
 
 class Workout extends Equatable{ // As this data will change as per user, we need to use Equatable
   
-  final String? title;
+  final String title;
   final List<Excercise> excercises;
   const Workout({required this.title, required this.excercises});
   factory Workout.fromJson(Map <String, dynamic> json){
