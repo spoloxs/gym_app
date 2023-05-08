@@ -21,3 +21,11 @@ class WorkoutEditing extends WorkoutState{ // Create the editing state
   @override
   List<Object?> get props => [workout, index, exindex];
 }
+
+class WorkoutRunning extends WorkoutState{
+  const WorkoutRunning(Workout? workout, int? elapsed):
+    super(workout, elapsed);
+    
+      @override
+      List<Object?> get props => [workout, elapsed];
+}

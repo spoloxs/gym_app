@@ -11,8 +11,8 @@ import 'package:numberpicker/numberpicker.dart';
 
 import '../blocs/workouts_cubit.dart';
 
-class EditExcerciseScreen extends StatefulWidget {
-  const EditExcerciseScreen(
+class EditExerciseScreen extends StatefulWidget {
+  const EditExerciseScreen(
       {Key? key, this.workout, required this.index, this.exIndex})
       : super(key: key);
   final Workout? workout;
@@ -20,15 +20,15 @@ class EditExcerciseScreen extends StatefulWidget {
   final int? exIndex;
 
   @override
-  State<StatefulWidget> createState() => _EditExcerciseScreenState();
+  State<StatefulWidget> createState() => _EditExerciseScreenState();
 }
 
-class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
+class _EditExerciseScreenState extends State<EditExerciseScreen> {
   TextEditingController? _titlecontroller;
   @override
   void initState() {
     _titlecontroller = TextEditingController(
-        text: widget.workout!.excercises[widget.exIndex!].title);
+        text: widget.workout!.exercises[widget.exIndex!].title);
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
           child: InkWell(
             onTap: ()=> showDialog(context: context,
              builder: ((_){
-              final controller = TextEditingController(text: '${widget.workout!.excercises[widget.exIndex!].prelude}');
+              final controller = TextEditingController(text: '${widget.workout!.exercises[widget.exIndex!].prelude}');
              return AlertDialog(
               icon: const Center(
                 child: Text("Set Prelude:"),
@@ -52,15 +52,15 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
                     FilteringTextInputFormatter.digitsOnly
                 ],
                 onSubmitted: (value) => setState(() {
-                  widget.workout!.excercises[widget.exIndex!] = widget
-                  .workout!.excercises[widget.exIndex!]
+                  widget.workout!.exercises[widget.exIndex!] = widget
+                  .workout!.exercises[widget.exIndex!]
                   .CopyWith(prelude: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 }),
                 onTapOutside: (value) => setState(() {
-                  widget.workout!.excercises[widget.exIndex!] = widget
-                  .workout!.excercises[widget.exIndex!]
+                  widget.workout!.exercises[widget.exIndex!] = widget
+                  .workout!.exercises[widget.exIndex!]
                   .CopyWith(prelude: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
@@ -70,12 +70,12 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
             child: NumberPicker(
                 minValue: 0,
                 maxValue: 3599,
-                value: widget.workout!.excercises[widget.exIndex!].prelude,
+                value: widget.workout!.exercises[widget.exIndex!].prelude,
                 textMapper: (numberText) =>
                     formatTime(int.parse(numberText), false),
                 onChanged: (value) => setState(() {
-                  widget.workout!.excercises[widget.exIndex!] = widget
-                  .workout!.excercises[widget.exIndex!]
+                  widget.workout!.exercises[widget.exIndex!] = widget
+                  .workout!.exercises[widget.exIndex!]
                   .CopyWith(prelude: value);
               BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
@@ -88,8 +88,8 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
             textAlign: TextAlign.center,
             controller: _titlecontroller,
             onChanged: (value) => setState(() {
-              widget.workout!.excercises[widget.exIndex!] = widget
-                  .workout!.excercises[widget.exIndex!]
+              widget.workout!.exercises[widget.exIndex!] = widget
+                  .workout!.exercises[widget.exIndex!]
                   .CopyWith(title: value);
               BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
@@ -100,7 +100,7 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
           child: InkWell(
             onTap: ()=> showDialog(context: context,
              builder: ((_){
-              final controller = TextEditingController(text: '${widget.workout!.excercises[widget.exIndex!].duration}');
+              final controller = TextEditingController(text: '${widget.workout!.exercises[widget.exIndex!].duration}');
              return AlertDialog(
               icon: const Center(
                 child: Text("Set Duration:"),
@@ -112,15 +112,15 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                 ],
                 onSubmitted: (value) => setState(() {
-                  widget.workout!.excercises[widget.exIndex!] = widget
-                  .workout!.excercises[widget.exIndex!]
+                  widget.workout!.exercises[widget.exIndex!] = widget
+                  .workout!.exercises[widget.exIndex!]
                   .CopyWith(duration: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 }),
                 onTapOutside: (value) => setState(() {
-                  widget.workout!.excercises[widget.exIndex!] = widget
-                  .workout!.excercises[widget.exIndex!]
+                  widget.workout!.exercises[widget.exIndex!] = widget
+                  .workout!.exercises[widget.exIndex!]
                   .CopyWith(duration: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
@@ -130,12 +130,12 @@ class _EditExcerciseScreenState extends State<EditExcerciseScreen> {
             child: NumberPicker(
                 minValue: 0,
                 maxValue: 3599,
-                value: widget.workout!.excercises[widget.exIndex!].duration,
+                value: widget.workout!.exercises[widget.exIndex!].duration,
                 textMapper: (numberText) =>
                     formatTime(int.parse(numberText), false),
                 onChanged: (value) => setState(() {
-                  widget.workout!.excercises[widget.exIndex!] = 
-                  widget.workout!.excercises[widget.exIndex!]
+                  widget.workout!.exercises[widget.exIndex!] = 
+                  widget.workout!.exercises[widget.exIndex!]
                   .CopyWith(duration: value);
               BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);

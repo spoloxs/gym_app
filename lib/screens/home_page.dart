@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_app/blocs/workout_cubit.dart';
 import 'package:gym_app/blocs/workouts_cubit.dart';
+import 'package:gym_app/screens/timer_screen.dart';
+import 'package:gym_app/states/workout_states.dart';
 
 import '../helper.dart';
 import '../models/workout.dart';
@@ -37,17 +39,20 @@ class HomePage extends StatelessWidget {
                               title: Text(workoutiterable.title),
                               trailing: Text(formatTime(
                                   workoutiterable.getTotalTime(), true)),
+                              onTap:() {
+                                BlocProvider.of<WorkoutCubit>(context).startWorkout(workoutiterable);
+                                },
                             ),
                         body: ListView.builder(
                           shrinkWrap: true,
                           itemBuilder: (context, i) => ListTile(
                             leading: Text(formatTime(
-                                workoutiterable.excercises[i].prelude, true)),
-                            title: Text(workoutiterable.excercises[i].title),
+                                workoutiterable.exercises[i].prelude, true)),
+                            title: Text(workoutiterable.exercises[i].title),
                             trailing: Text(formatTime(
-                                workoutiterable.excercises[i].duration, true)),
+                                workoutiterable.exercises[i].duration, true)),
                           ),
-                          itemCount: workoutiterable.excercises.length,
+                          itemCount: workoutiterable.exercises.length,
                         )),
                   )
                   .toList(),

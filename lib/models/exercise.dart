@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class Excercise extends Equatable{ // Needs to be equatable in order to be changeable as workout is equatable
-  Excercise(
+class Exercise extends Equatable{ // Needs to be equatable in order to be changeable as workout is equatable
+  const Exercise(
     {
       required this.title,
       required this.prelude,
@@ -19,9 +19,9 @@ class Excercise extends Equatable{ // Needs to be equatable in order to be chang
   final int? index;
   final int? startTime;
 
-  // Also a constructor but can send data already in Excercise class stored in memory
+  // Also a constructor but can send data already in Exercise class stored in memory
   // so we are using factory
-  factory Excercise.fromJson(Map<String, dynamic> json, int index, int startTime) => Excercise(
+  factory Exercise.fromJson(Map<String, dynamic> json, int index, int startTime) => Exercise(
     title : json["title"], 
     prelude : json["prelude"], 
     duration : json["duration"],
@@ -35,13 +35,13 @@ class Excercise extends Equatable{ // Needs to be equatable in order to be chang
     "duration" : duration,
   };
   
-  Excercise CopyWith({
+  Exercise CopyWith({
     String? title,
     int? prelude,
     int? duration,
     int? index,
     int? startTime
-  })=> Excercise(title: title??this.title,
+  })=> Exercise(title: title??this.title,
     prelude: prelude??this.prelude,
     duration: duration??this.duration,
     index: index??this.index,

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_app/blocs/workouts_cubit.dart';
-import 'package:gym_app/models/workout.dart';
 import 'package:gym_app/screens/editworkout_page.dart';
 import 'package:gym_app/screens/home_page.dart';
+import 'package:gym_app/screens/timer_screen.dart';
 import 'package:gym_app/states/workout_states.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'blocs/workout_cubit.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory()
+  );
   runApp(const WorkoutClass());
 }
 
@@ -42,7 +48,7 @@ class WorkoutClass extends StatelessWidget {
               } else if (state is WorkoutEditing) {
                 return (const editWorkoutScreen());
               }
-              return Container();
+              return (const TimeScreen());
             },
           ),
         ));

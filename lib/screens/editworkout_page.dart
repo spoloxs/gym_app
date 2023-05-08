@@ -11,7 +11,7 @@ import 'package:gym_app/screens/home_page.dart';
 
 import '../blocs/workouts_cubit.dart';
 import '../states/workout_states.dart';
-import 'editexcercise_page.dart';
+import 'editexercise_page.dart';
 
 class editWorkoutScreen extends StatelessWidget {
   const editWorkoutScreen({Key? key}) : super(key: key);
@@ -86,22 +86,22 @@ class editWorkoutScreen extends StatelessWidget {
                 ),
               ),
               body: ListView.builder(
-                  itemCount: we.workout!.excercises.length,
+                  itemCount: we.workout!.exercises.length,
                   itemBuilder: (context, index) {
                     if (we.exindex == index) {
-                      return (EditExcerciseScreen(
+                      return (EditExerciseScreen(
                           workout: we.workout,
                           index: we.index,
                           exIndex: we.exindex));
                     } else {
                       return (ListTile(
                           leading: Text(formatTime(
-                              we.workout!.excercises[index].prelude, true)),
-                          title: Text(we.workout!.excercises[index].title),
+                              we.workout!.exercises[index].prelude, true)),
+                          title: Text(we.workout!.exercises[index].title),
                           trailing: Text(formatTime(
-                              we.workout!.excercises[index].duration, true)),
+                              we.workout!.exercises[index].duration, true)),
                           onTap: () => BlocProvider.of<WorkoutCubit>(context)
-                              .editExcercise(index)));
+                              .editExercise(index)));
                     }
                   }),
             ));

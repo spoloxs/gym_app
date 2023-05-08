@@ -1,13 +1,17 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_app/models/workout.dart';
+import 'package:wakelock/wakelock.dart';
 
 import '../states/workout_states.dart';
 
 class WorkoutCubit extends Cubit<WorkoutState>{
   WorkoutCubit():super(const WorkoutInitial());
+
+  Timer? _timer;
 
   editWorkout(Workout workout, int index)
   => emit(WorkoutEditing(workout, index, null));
@@ -15,6 +19,30 @@ class WorkoutCubit extends Cubit<WorkoutState>{
   goHome() // Setting it to WorkoutInitial as calling it automatically returns us to HomePage() (it's written in the main.dart)
   => emit(const WorkoutInitial());
 
-  editExcercise(int? exindex)
+  editExercise(int? exindex)
   => emit(WorkoutEditing(state.workout, (state as WorkoutEditing).index, exindex));
+
+  onTick(Timer timer){
+    if (state is WorkoutRunning)
+    {
+      WorkoutRunning wr = state as WorkoutRunning;
+      if(wr.elapsed! < wr.workout!.getTotalTime())
+      {
+        emit(WorkoutRunning(wr.workout, wr.elapsed! + 1));
+      }
+      else{
+        _timer!.cancel();
+        Wakelock.disable();
+        emit(const WorkoutInitial());
+      }
+    }
+  }
+
+  startWorkout(Workout workout, [int? index])
+  {
+    Wakelock.enable();
+    emit(WorkoutRunning(workout, 0));
+    _timer = Timer.periodic(const Duration(seconds: 1), onTick);
+  }
+
 }

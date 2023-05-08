@@ -5,33 +5,36 @@ import 'exercise.dart';
 class Workout extends Equatable{ // As this data will change as per user, we need to use Equatable
   
   final String title;
-  final List<Excercise> excercises;
-  const Workout({required this.title, required this.excercises});
+  final List<Exercise> exercises;
+  const Workout({required this.title, required this.exercises});
+
   factory Workout.fromJson(Map <String, dynamic> json){
-    List<Excercise> excercises = [];
+    List<Exercise> exercises = [];
     int index = 0; 
     int startTime = 0;
     for(var ex in (json['exercises'] as Iterable))
     {
-      excercises.add(Excercise.fromJson(ex, index, startTime));
+      exercises.add(Exercise.fromJson(ex, index, startTime));
       index++;
-      startTime += excercises.last.prelude + excercises.last.duration;
+      startTime += exercises.last.prelude + exercises.last.duration;
     }
-    return(Workout(title: json['title'] as String, excercises: excercises));
+    return(Workout(title: json['title'] as String, exercises: exercises));
   }
 
   Map<String, dynamic> toJson() => {
     "title" : title,
-    "excercises" : excercises,
+    "exercises" : exercises,
   };
 
   int getTotalTime(){
-    int time = excercises.fold(0, (previousValue, element) => previousValue + element.prelude + element.duration);
+    int time = exercises.fold(0, (previousValue, element) => previousValue + element.prelude + element.duration);
     return time;
   }
 
-  copyWith({String? title, List<Excercise>? excercises}) => Workout(title: title??this.title, excercises: excercises??this.excercises);
+  copyWith({String? title, List<Exercise>? exercises}) => Workout(title: title??this.title, exercises: exercises??this.exercises);
+
+  Exercise getCurrentExercise(int? elapsed) => (exercises.lastWhere((element) => element.startTime! <= elapsed!));
 
   @override
-  List<Object?> get props => [title, excercises];
+  List<Object?> get props => [title, exercises];
 }
