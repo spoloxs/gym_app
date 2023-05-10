@@ -46,9 +46,13 @@ class WorkoutClass extends StatelessWidget {
               if (state is WorkoutInitial) {
                 return (const HomePage());
               } else if (state is WorkoutEditing) {
-                return (const editWorkoutScreen());
+                return (const EditWorkoutScreen());
               }
-              return (const TimeScreen());
+              else if (state is WorkoutRunning)
+              {
+                return (const TimeScreen());
+              }
+              else{return(Container());}
             },
           ),
         ));

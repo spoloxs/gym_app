@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class Exercise extends Equatable{ // Needs to be equatable in order to be changeable as workout is equatable
@@ -35,7 +33,7 @@ class Exercise extends Equatable{ // Needs to be equatable in order to be change
     "duration" : duration,
   };
   
-  Exercise CopyWith({
+  Exercise copyWith({
     String? title,
     int? prelude,
     int? duration,

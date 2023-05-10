@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gym_app/models/exercise.dart';
 import 'package:gym_app/models/workout.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -31,18 +29,22 @@ class WorkoutCubit extends Cubit<WorkoutState>{
         emit(WorkoutRunning(wr.workout, wr.elapsed! + 1));
       }
       else{
-        _timer!.cancel();
+        timer.cancel();
         Wakelock.disable();
         emit(const WorkoutInitial());
       }
     }
+    else{
+      timer.cancel();
+    }
   }
-
+  
   startWorkout(Workout workout, [int? index])
   {
     Wakelock.enable();
     emit(WorkoutRunning(workout, 0));
-    _timer = Timer.periodic(const Duration(seconds: 1), onTick);
+    if(state is WorkoutRunning)
+     {_timer = Timer.periodic(const Duration(seconds: 1), onTick);}
   }
 
 }

@@ -41,7 +41,7 @@ class TimeScreen extends StatelessWidget{
       },
       builder: (context, state) {
         final stats = getstats(state.workout!, state.elapsed!);
-        final bgcolor = stats["isprelude"] ? Color.fromARGB(255, 252, 186, 186) : Color.fromARGB(255, 194, 219, 240);
+        final bgcolor = stats["isprelude"] ? const Color.fromARGB(255, 252, 186, 186) : const Color.fromARGB(255, 194, 219, 240);
         final maincolor = (stats["isprelude"] ? Colors.red : Colors.blue);
         final height = MediaQuery.of(context).size.height;
         final width = MediaQuery.of(context).size.width;
@@ -80,25 +80,22 @@ class TimeScreen extends StatelessWidget{
                   dotsCount: state.workout!.exercises.length,
                 )
               ),
-              Spacer(),
-              Stack(
-                children: [SizedBox(
-                height: height > width ? width - 80 - height / 30 - height / 80: height - 80 - height / 30 - height / 80,
-                width: height > width ? width - 80 - height / 30 - height / 80: height - 80 - height / 30 - height / 80,
-                child: CircularStepProgressIndicator(
-                  unselectedColor: bgcolor,
-                  selectedColor: maincolor,
-                  totalSteps: stats["isprelude"] ? stats["currentexercise"].prelude : stats["currentexercise"].duration,
-                  currentStep: stats["completedtime"],
-                  )
+              Container(height: height / 10,),
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1.0/1.0,
+                  child: Stack(
+                    children: [CircularStepProgressIndicator(
+                      unselectedColor: bgcolor,
+                      selectedColor: maincolor,
+                      totalSteps: stats["isprelude"] ? stats["currentexercise"].prelude : stats["currentexercise"].duration,
+                      currentStep: stats["completedtime"],
+                      ),
+                  Center(child: Text(formatTime((stats['remainingtime']), true)))],
+                  ),
+                ),
               ),
-              SizedBox(
-                height: height > width ? width - 80 - height / 30 - height / 80: height - 80 - height / 30 - height / 80,
-                width: height > width ? width - 80 - height / 30 - height / 80: height - 80 - height / 30 - height / 80,
-                child: Center(child: Text("${formatTime((stats['remainingtime']), true)}")),
-              )],
-              ),
-              Spacer(),
+              Container(height: height / 10,),
             ],
           ),
           )

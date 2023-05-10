@@ -1,11 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_app/blocs/workout_cubit.dart';
 import 'package:gym_app/helper.dart';
-import 'package:gym_app/models/exercise.dart';
 import 'package:gym_app/models/workout.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -54,14 +50,14 @@ class _EditExerciseScreenState extends State<EditExerciseScreen> {
                 onSubmitted: (value) => setState(() {
                   widget.workout!.exercises[widget.exIndex!] = widget
                   .workout!.exercises[widget.exIndex!]
-                  .CopyWith(prelude: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
+                  .copyWith(prelude: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 }),
                 onTapOutside: (value) => setState(() {
                   widget.workout!.exercises[widget.exIndex!] = widget
                   .workout!.exercises[widget.exIndex!]
-                  .CopyWith(prelude: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
+                  .copyWith(prelude: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 }),
@@ -76,7 +72,7 @@ class _EditExerciseScreenState extends State<EditExerciseScreen> {
                 onChanged: (value) => setState(() {
                   widget.workout!.exercises[widget.exIndex!] = widget
                   .workout!.exercises[widget.exIndex!]
-                  .CopyWith(prelude: value);
+                  .copyWith(prelude: value);
               BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 })),
@@ -90,7 +86,7 @@ class _EditExerciseScreenState extends State<EditExerciseScreen> {
             onChanged: (value) => setState(() {
               widget.workout!.exercises[widget.exIndex!] = widget
                   .workout!.exercises[widget.exIndex!]
-                  .CopyWith(title: value);
+                  .copyWith(title: value);
               BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
             }),
@@ -114,14 +110,14 @@ class _EditExerciseScreenState extends State<EditExerciseScreen> {
                 onSubmitted: (value) => setState(() {
                   widget.workout!.exercises[widget.exIndex!] = widget
                   .workout!.exercises[widget.exIndex!]
-                  .CopyWith(duration: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
+                  .copyWith(duration: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 }),
                 onTapOutside: (value) => setState(() {
                   widget.workout!.exercises[widget.exIndex!] = widget
                   .workout!.exercises[widget.exIndex!]
-                  .CopyWith(duration: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
+                  .copyWith(duration: int.parse(controller.text) > 3599 ? 3599 : int.parse(controller.text));
                   BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 }),
@@ -136,7 +132,7 @@ class _EditExerciseScreenState extends State<EditExerciseScreen> {
                 onChanged: (value) => setState(() {
                   widget.workout!.exercises[widget.exIndex!] = 
                   widget.workout!.exercises[widget.exIndex!]
-                  .CopyWith(duration: value);
+                  .copyWith(duration: value);
               BlocProvider.of<WorkoutsCubit>(context)
                   .saveWorkout(widget.workout!, widget.index);
                 })),
