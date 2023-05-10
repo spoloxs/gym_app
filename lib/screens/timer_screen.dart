@@ -80,7 +80,7 @@ class TimeScreen extends StatelessWidget{
                   dotsCount: state.workout!.exercises.length,
                 )
               ),
-              Container(height: height / 10,),
+              Spacer(),
               Expanded(
                 child: AspectRatio(
                   aspectRatio: 1.0/1.0,
@@ -95,7 +95,7 @@ class TimeScreen extends StatelessWidget{
                   ),
                 ),
               ),
-              Container(height: height / 10,),
+              Spacer()
             ],
           ),
           )
